@@ -18,12 +18,18 @@
         system,
         ...
       }: {
+        packages.fonts = pkgs.buildEnv {
+          name = "tinix";
+          paths = with config.packages; [
+            notears
+          ];
+        };
         packages.notears = pkgs.stdenvNoCC.mkDerivation {
           name = "no-tears*-font";
           dontConfigure = true;
           src = pkgs.fetchzip {
             url = "https://indestructibletype.com/notears.zip";
-            sha256 = "";
+            sha256 = "sha256-M9WHCW5i5HlW1Bkg4Dd7raK4i8KHvO5wKJnezYnN4YQ=";
             stripRoot = false;
           };
           installPhase = ''
