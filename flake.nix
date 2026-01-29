@@ -21,6 +21,7 @@
         packages.fonts = pkgs.buildEnv {
           name = "tinix";
           paths = with config.packages; [
+            marauder
             notears
           ];
         };
@@ -37,6 +38,20 @@
             cp -R $src $out/share/fonts/truetype/
           '';
           meta = {description = "it's like Comic Sans but with justification";};
+        };
+        packages.marauder = pkgs.stdenvNoCC.mkDerivation {
+          name = "marauder*-font";
+          dontConfigure = true;
+          src = pkgs.fetchzip {
+            url = "https://indestructibletype.com/Marauder.zip";
+            sha256 = "sha256-wVaZLfEl/+LI+OqbtxiVdcYjrWfKTu7KdXeTXMI9TjM=";
+            stripRoot = false;
+          };
+          installPhase = ''
+            mkdir -p $out/share/fonts
+            cp -R $src/ttf $out/share/fonts/truetype/
+            cp -R $src/otf $out/share/fonts/opentype/
+          '';
         };
       };
     };
