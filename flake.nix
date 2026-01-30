@@ -21,6 +21,7 @@
         packages.fonts = pkgs.buildEnv {
           name = "tinix";
           paths = with config.packages; [
+            gnomon
             marauder
             notears
           ];
@@ -51,6 +52,27 @@
             mkdir -p $out/share/fonts
             cp -R $src/ttf $out/share/fonts/truetype/
             cp -R $src/otf $out/share/fonts/opentype/
+          '';
+        };
+        packages.gnomon = pkgs.stdenvNoCC.mkDerivation {
+          name = "gnomon*-font";
+          dontConfigure = true;
+          src = pkgs.fetchFromGitHub {
+            owner = "indestructible-type";
+            repo = "Gnomon";
+            rev = "7517c82";
+            hash = "sha256-7+4N2XFRfZ5tZnECQPcuejq4ZPGoVsIWF8u+85TGURk=";
+          };
+
+          nativeBuildInputs = with pkgs; [
+            python313Packages.fontmake
+          ];
+
+          buildPhase = ''
+            cd $src/Source/Gnomon\*\ Simple
+
+            mkdir -p $out/share/fonts/truetype
+            fontmake -o variable -m gnomon.designspace --output-dir $out/share/fonts/truetype
           '';
         };
       };
