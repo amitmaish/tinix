@@ -17,7 +17,16 @@
         pkgs,
         system,
         ...
-      }: {
+      }: rec {
+        overlay = final: prev: let
+          package = name: prev.pkgs.callPackage packages.${name} {};
+        in {
+          tinix-fonts = package "fonts";
+          notears-font = package "notears";
+          marauder-font = package "marauder";
+          gnomon-font = package "gnomon";
+        };
+
         packages.fonts = pkgs.buildEnv {
           name = "tinix";
           paths = with config.packages; [
