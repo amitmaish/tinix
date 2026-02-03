@@ -8,7 +8,9 @@
 
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} {
-      imports = [];
+      imports = [
+        inputs.flake-parts.flakeModules.easyOverlay
+      ];
       systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin"];
       perSystem = {
         config,
@@ -17,16 +19,10 @@
         pkgs,
         system,
         ...
-      }: rec {
-        overlay = final: prev: let
-          package = name: prev.pkgs.callPackage packages.${name} {};
-        in {
-          tinix-fonts = package "fonts";
-          notears-font = package "notears";
-          marauder-font = package "marauder";
-          gnomon-font = package "gnomon";
+      }: {
+        overlayAttrs = {
+          tinix-fonts = (config.packages).fonts;
         };
-
         packages.fonts = pkgs.buildEnv {
           name = "tinix";
           paths = with config.packages; [
