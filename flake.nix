@@ -24,6 +24,7 @@
         ...
       }: {
         overlayAttrs = {
+          inherit (config.packages) blender-bin;
           tinix-fonts = (config.packages).fonts;
         };
         packages.fonts = pkgs.buildEnv {
