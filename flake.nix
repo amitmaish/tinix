@@ -9,6 +9,7 @@
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
+        ./blender.nix
         ./indestructabletype.nix
         ./tom7fonts
         inputs.flake-parts.flakeModules.easyOverlay
