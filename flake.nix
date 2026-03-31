@@ -10,6 +10,7 @@
     flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
         ./blender.nix
+        ./cemu.nix
         ./indestructabletype.nix
         ./tom7fonts
         inputs.flake-parts.flakeModules.easyOverlay
@@ -24,7 +25,7 @@
         ...
       }: {
         overlayAttrs = {
-          inherit (config.packages) blender-bin;
+          inherit (config.packages) blender-bin cemu-bin;
           tinix-fonts = (config.packages).fonts;
         };
         packages.fonts = pkgs.buildEnv {
