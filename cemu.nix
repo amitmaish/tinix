@@ -41,5 +41,41 @@
           runHook postInstall
         '';
       }) {};
+    packages.ukmm-bin = pkgs.callPackage ({
+      fetchzip,
+      lib,
+      stdenv,
+      undmg,
+    }: let
+      pname = "ukmm-bin";
+      version = "0.15.0";
+      meta = {
+        inherit (pkgs.ukmm.meta) license homepage description mainProgram longDescription;
+        platforms = [
+          "aarch64-darwin"
+        ];
+      };
+    in
+      stdenv.mkDerivation rec {
+        inherit pname version meta;
+
+        src = fetchzip {
+          url = "https://github.com/NiceneNerd/ukmm/releases/download/v${version}/ukmm-aarch64-apple-darwin.tar.xz";
+          hash = "sha256-vNG5QAPZUBKlNRkjfVBkUGGmz+oo87NCGZX8NK9ZQB4=";
+        };
+        dontBuild = true;
+        dontStrip = true;
+
+        nativeBuildInputs = [
+          undmg
+        ];
+
+        installPhase = ''
+          runHook preInstall
+          mkdir -p "$out/bin"
+          cp ukmm "$out/bin/ukmm"
+          runHook postInstall
+        '';
+      }) {};
   };
 }

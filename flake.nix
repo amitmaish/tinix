@@ -25,7 +25,12 @@
         ...
       }: {
         overlayAttrs = {
-          inherit (config.packages) blender-bin cemu-bin;
+          inherit
+            (config.packages)
+            blender-bin
+            cemu-bin
+            ukmm-bin
+            ;
           tinix-fonts = (config.packages).fonts;
         };
         packages.fonts = pkgs.buildEnv {
