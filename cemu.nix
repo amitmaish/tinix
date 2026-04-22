@@ -48,7 +48,7 @@
       undmg,
     }: let
       pname = "ukmm-bin";
-      version = "0.15.0";
+      version = "0.17.0";
       meta = {
         inherit (pkgs.ukmm.meta) license homepage description mainProgram longDescription;
         platforms = [
@@ -61,7 +61,7 @@
 
         src = fetchzip {
           url = "https://github.com/NiceneNerd/ukmm/releases/download/v${version}/ukmm-aarch64-apple-darwin.tar.xz";
-          hash = "sha256-vNG5QAPZUBKlNRkjfVBkUGGmz+oo87NCGZX8NK9ZQB4=";
+          hash = "sha256-VMFqW+ySkhV73KW6srWtsQx06oqcHUeAo8PkfU2xyIE=";
         };
         dontBuild = true;
         dontStrip = true;
