@@ -11,7 +11,7 @@
       imports = [
         ./8bitdo.nix
         ./blender.nix
-        ./cemu.nix
+        ./emulator.nix
         ./indestructabletype.nix
         ./tom7fonts
         inputs.flake-parts.flakeModules.easyOverlay
@@ -28,6 +28,7 @@
         overlayAttrs = {
           inherit
             (config.packages)
+            azahar-bin
             _8bitdo_ultimate_v2
             blender-bin
             cemu-bin

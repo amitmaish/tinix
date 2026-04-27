@@ -77,5 +77,35 @@
           runHook postInstall
         '';
       }) {};
+    packages.azahar-bin = pkgs.callPackage ({
+      fetchzip,
+      lib,
+      stdenv,
+      undmg,
+    }: let
+      pname = "azahar-bin";
+      version = "2125.1.1";
+      meta = {
+        inherit (pkgs.azahar.meta) license homepage description mainProgram longDescription;
+        platforms = lib.platforms.darwin;
+      };
+    in
+      stdenv.mkDerivation rec {
+        inherit pname version meta;
+
+        src = fetchzip {
+          url = "https://github.com/azahar-emu/azahar/releases/download/${version}/azahar-macos-universal-${version}.zip";
+          hash = "sha256-d+H/RwDsIb4r3zyS1Y/+LT76i61kKnk+kWdRvBbTglk=";
+        };
+        dontBuild = true;
+        dontStrip = true;
+
+        installPhase = ''
+          runHook preInstall
+          mkdir -p "$out/Applications/Azahar.app"
+          cp -r Azahar.app/* "$out/Applications/Azahar.app"
+          runHook postInstall
+        '';
+      }) {};
   };
 }
