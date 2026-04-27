@@ -34,7 +34,7 @@
       dontConfigure = true;
       src = pkgs.fetchzip {
         url = "https://indestructibletype.com/Marauder.zip";
-        sha256 = "sha256-wVaZLfEl/+LI+OqbtxiVdcYjrWfKTu7KdXeTXMI9TjM=";
+        sha256 = "sha256-aOllomjI1tWnzhB2zY50xrQYUvcXFZgsAjj2RhIYzpw=";
         stripRoot = false;
       };
       installPhase = ''
