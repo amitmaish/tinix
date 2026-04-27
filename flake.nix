@@ -9,6 +9,7 @@
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
+        ./8bitdo.nix
         ./blender.nix
         ./cemu.nix
         ./indestructabletype.nix
@@ -27,6 +28,7 @@
         overlayAttrs = {
           inherit
             (config.packages)
+            _8bitdo_ultimate_v2
             blender-bin
             cemu-bin
             ukmm-bin
