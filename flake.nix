@@ -4,10 +4,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    bevy_cli = {
-      url = "github:TheBevyFlock/bevy_cli";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = inputs @ {flake-parts, ...}:
@@ -39,7 +35,6 @@
             ukmm-bin
             ;
           tinix-fonts = (config.packages).fonts;
-          bevy = (config.packages).bevy;
         };
         packages.fonts = pkgs.buildEnv {
           name = "tinix";
@@ -48,7 +43,6 @@
             tom7-fonts
           ];
         };
-        packages.bevy = inputs.bevy_cli.packages.${system}.default;
       };
     };
 }
