@@ -11,7 +11,7 @@
       undmg,
     }: let
       pname = "blender-bin";
-      version = "5.1.2";
+      version = "5.2.0";
       meta = {
         inherit (pkgs.blender.meta) license homepage description mainProgram longDescription;
         platforms = [
@@ -23,8 +23,8 @@
         inherit pname version meta;
 
         src = fetchurl {
-          url = "https://mirrors.iu13.net/blender/release/Blender5.1/blender-${version}-macos-arm64.dmg";
-          hash = "sha256-8QT/7iumruMjKOXCA7fkYI2KF0X3u88nZvO5d36Pvhc=";
+          url = "https://mirrors.iu13.net/blender/release/Blender5.2/blender-${version}-macos-arm64.dmg";
+          hash = "sha256-7U2DkBZt7F6gooE6A9tiIfIGzgFkQr5/WfQddglyVoo=";
         };
         dontBuild = true;
         dontStrip = true;
